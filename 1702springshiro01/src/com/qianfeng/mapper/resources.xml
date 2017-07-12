@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.dao.ResourcesDao">
+    <resultMap type="com.qianfeng.bean.Resources" id="m1">
+        <result property="id" column="id"/>
+        <result property="text" column="name"/>
+        <collection property="children" ofType="com.qianfeng.bean.Resources">
+            <result property="id" column="bid"/>
+            <result property="text" column="bname"/>
+        </collection>
+    </resultMap>
+    <select id="selectAllResources" resultMap="m1">
+        select a.id,a.name,b.id as bid,b.name AS bname from resource  a left join resource  b on a.id=b.pid WHERE a.pid=0
+    </select>
+    <resultMap type="com.qianfeng.bean.Resources" id="m2">
+        <result property="id" column="id"/>
+        <result property="text" column="name"/>
+        <collection property="children" ofType="com.qianfeng.bean.Resources">
+            <result property="id" column="bid"/>
+            <result property="text" column="bname"/>
+            <result property="url" column="burl"/>
+        </collection>
+    </resultMap>
+    <select id="selectQxByUser" resultMap="m2">
+        SELECT a.id, a. NAME, b.id AS bid,b. NAME AS bname,b.url as burl FROM resource a left join resource b ON b.pid = a.id LEFT JOIN user_resource ur ON b.id = ur.resid WHERE ur.uid =
+        (SELECT uid FROM users WHERE account=#{account}) and a.pid=0
+    </select>
+<delete id="delteAllPermissions">
+delete from user_resource where uid=#{uid}
+</delete>
+<insert id="assignPermissions" parameterType="map">
+insert into user_resource(uid,resid) values
+<foreach collection="resid" item="resid" separator=",">
+    (#{userid},#{resid})
+</foreach>
+</insert>
+</mapper>
