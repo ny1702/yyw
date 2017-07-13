@@ -53,7 +53,7 @@
         <property name="dataSource" ref="ds"></property>
         <property name="permissionsLookupEnabled" value="true"></property>
         <!--这个登录-->
-        <property name="authenticationQuery" value="select pwd from users where account=?"></property>
+        <property name="authenticationQuery" value="select  pwd from users where account=?"></property>
         <!--这个是用户角色查询-->
         <property name="userRolesQuery" value="select rname from user_role left join role using(rid) left join users using (uid) where account=?"></property>
        <!--权限查询-->

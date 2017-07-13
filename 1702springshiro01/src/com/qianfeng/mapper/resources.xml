@@ -25,7 +25,7 @@
     </resultMap>
     <select id="selectQxByUser" resultMap="m2">
         SELECT a.id, a. NAME, b.id AS bid,b. NAME AS bname,b.url as burl FROM resource a left join resource b ON b.pid = a.id LEFT JOIN user_resource ur ON b.id = ur.resid WHERE ur.uid =
-        (SELECT uid FROM users WHERE account=#{account}) and a.pid=0
+       #{uid} and a.pid=0
     </select>
 <delete id="delteAllPermissions">
 delete from user_resource where uid=#{uid}

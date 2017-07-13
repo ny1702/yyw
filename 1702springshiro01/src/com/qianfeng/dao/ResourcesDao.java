@@ -9,7 +9,7 @@ import java.util.Map;
 @Repository
 public interface ResourcesDao {
     List<Resources> selectAllResources();
-    List<Resources> selectQxByUser(String account);
+    List<Resources> selectQxByUser(int uid);
     void assignPermissions(Map<String, Object> map);
     void delteAllPermissions(int id);
 }

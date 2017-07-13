@@ -134,9 +134,6 @@
     //多条数据删除
     function remove() {
         var data = $("#first").datagrid('getSelections');
-        var x = JSON.stringify(data);
-        alert(x)
-
         if(data.length!=0){
             $.messager.confirm('提示框', '你确定要删除吗', function (r) {
                 if (r) {
@@ -174,11 +171,14 @@
     //获取该用户的权限
     function findqx(){
         var user= $("#first").datagrid('getSelected');
+       // alert(user.uid)
+        var x = JSON.stringify(user);
+       // alert("转换后的"+x)
         $.ajax({
             url:"../selectQxByUser1.do",
-            cache:false,
+
             method: "post",
-            data:{account:user.account},
+            data:{id:user.uid},
             success:function(x){
                  alert("后台传过来的"+x)
                 if(x){
@@ -188,7 +188,7 @@
                         var childrendata= data[i].children;
                         for(var j=0;j<childrendata.length;j++){
                             // alert(childrendata[j].id)
-                            var node=$("#muen_tree").tree('find',childrendata[j].uid);
+                            var node=$("#muen_tree").tree('find',childrendata[j].id);
                             // alert(node.target)
                             if (null != node && undefined != node)
                             {

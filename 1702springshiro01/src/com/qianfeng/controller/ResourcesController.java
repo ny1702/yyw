@@ -2,6 +2,7 @@ package com.qianfeng.controller;
 
 import com.qianfeng.Service.ResourcesService;
 import com.qianfeng.bean.Resources;
+import com.qianfeng.bean.Users;
 import com.qianfeng.dao.ResourcesDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,17 +32,19 @@ public class ResourcesController {
     @RequestMapping("selectQxByUser.do")
     @ResponseBody
     public List<Resources> selectQxByUser(HttpSession session){
-        String account =(String)session.getAttribute("account");
-        //System.out.print("账户："+ account);
-        return rd.selectQxByUser(account);
+        Users users =(Users)session.getAttribute("users");
+       System.out.print("账户："+ users.getUid());
+        return rd.selectQxByUser(users.getUid());
     }
     @RequestMapping("selectQxByUser1.do")
-    public List<Resources> selectQxByUser(@RequestParam(value="account") String account){
-        System.out.println("我是"+ account);
+    @ResponseBody
+    public List<Resources> selectQxByUser(@RequestParam(value="id") int id){
+        System.out.println("我是前台传的ID："+ id);
 
-        return rd.selectQxByUser(account);
+        return rd.selectQxByUser(id);
     }
     @RequestMapping("assignPermissions.do")
+    @ResponseBody
     public String assignPermissions(@RequestBody ArrayList<Integer> idarr){
         //从集合中取出userid
         rs.fenp(idarr);

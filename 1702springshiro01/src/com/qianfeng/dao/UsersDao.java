@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface UsersDao {
-
+    Users selectUersByAccount(String account);
     public List<Users> selectByUsers(int start);
     public int deleteById(int id);
     public void insertUsers(Users user);

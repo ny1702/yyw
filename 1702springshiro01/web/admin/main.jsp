@@ -30,7 +30,6 @@
 
         $("#menu_tree").tree({
             onClick:function(node){
-                alert(node.url)
                 var had=$("#work").tabs("exists",node.text);
                 if(!had){
                     $("#work").tabs("add",{
