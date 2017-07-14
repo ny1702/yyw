@@ -100,6 +100,20 @@
             </props>
         </property>
     </bean>
+
+  <!--  &lt;!&ndash; 自定义Realm &ndash;&gt;
+    <bean id="customRealm" class="com.qianfeng.controller.LoginController">
+        &lt;!&ndash; 将凭证匹配器设置到realm中，realm按照凭证匹配器的要求进行散列 &ndash;&gt;
+        <property name="credentialsMatcher" ref="credentialsMatcher" />
+    </bean>
+
+    &lt;!&ndash; 凭证匹配器 &ndash;&gt;
+    <bean id="credentialsMatcher"
+          class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5" />
+        <property name="hashIterations" value="1" />
+
+    </bean>-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.qianfeng.dao"></property>
     </bean>

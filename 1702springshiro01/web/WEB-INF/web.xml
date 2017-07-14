@@ -39,7 +39,7 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
-    <!--配置shiro的过滤器-->
+    <!--配置shiro的安全过滤器-->
     <filter>
         <filter-name>shiro</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -52,4 +52,5 @@
         <filter-name>shiro</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
 </web-app>

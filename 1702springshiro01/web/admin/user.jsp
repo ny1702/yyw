@@ -86,30 +86,35 @@
                 }
             ]
         });
-        load2(1);
+        load2(1,1);
     }
     $(init);
     //分页处理
-    function load2(p) {
+    function load2(p,size) {
         $.getJSON("../selectByUsers.do",
             {
-                page : p
+                page : p,
+                size:size
             },
             function(msg) {
-                // alert(msg)
-                $("#first").datagrid("loadData", msg);
+               // var jsons= JSON.stringify(msg);
+                //alert("分页的数据"+jsons)
+                $("#first").datagrid("loadData", msg.usersList);
                 var pager = $("#first").datagrid("getPager");
                 pager.pagination({
                     //总记录数
-                    total : 7,
+                    total : msg.total,
                     //每页显示的数
-                    pageSize : 2,
+                   // pageSize : 2,
                     //当分页创建完毕时显示当前的页码(当前页)
                     pageNumber : p,
                     //用户能够灵活的改变每页显示的记录数
+
                     pageList : [ 1, 2 ],
+
                     onSelectPage : function(page, size) {
-                        load2(page);
+                        //alert("大小"+size);
+                        load2(page,size);
                     },
                     beforePageText : '第',
                     afterPageText : '页,共{pages}页',
@@ -130,6 +135,7 @@
                     ]*/
                 });
             })
+
     }
     //多条数据删除
     function remove() {

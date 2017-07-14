@@ -6,8 +6,12 @@
     <select id="selectUersByAccount" resultType="com.qianfeng.bean.Users">
         SELECT * from users where account=#{account}
     </select>
+
+    <select id="usersCount"  resultType="java.lang.Integer">
+        SELECT count(*) from users
+    </select>
     <select id="selectByUsers" resultType="com.qianfeng.bean.Users">
-        select * from users limit #{start},2
+        select * from users limit #{start},#{size}
     </select>
     <delete id="deleteById" >
         delete from users where uid=#{uid}

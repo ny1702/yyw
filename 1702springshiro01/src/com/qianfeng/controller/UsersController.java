@@ -20,9 +20,14 @@ public class UsersController {
 
     @RequestMapping("selectByUsers.do")
     @ResponseBody
-    public List<Users> showUsers(int page) {
-        int start=(page-1)*2;
-        return udao.selectByUsers(start);
+    public Map<String,Object> showUsers(int page,int size) {
+        int start=(page-1)*size;
+        int count=udao.usersCount();
+        List<Users> usersList= udao.selectByUsers(start,size);
+        Map<String,Object> map= new HashMap<>();
+        map.put("total",count);
+        map.put("usersList",usersList);
+        return map;
     }
     @RequestMapping("deleteById.do")
     @ResponseBody
